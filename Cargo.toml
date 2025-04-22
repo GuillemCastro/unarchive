@@ -4,6 +4,9 @@ version = "0.0.1"
 edition = "2024"
 license = "Apache-2.0"
 authors = ["Guillem Castro <guillemcastro4@gmail.com>"]
+repository = "https://github.com/GuillemCastro/unarchive"
+readme = "README.md"
+description = "A crate to unarchive common archive formats"
 
 [dependencies]
 tokio = { version = "1", features = ["full"] }
