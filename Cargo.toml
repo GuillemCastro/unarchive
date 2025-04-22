@@ -1,0 +1,20 @@
+[package]
+name = "unarchive"
+version = "0.0.1"
+edition = "2024"
+license = "Apache-2.0"
+authors = ["Guillem Castro <guillemcastro4@gmail.com>"]
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+tokio-util = { version = "0.7.14", features = ["full"] }
+async-compression = { version = "0.4.22", features = ["gzip", "tokio"] }
+async_zip = { version = "0.0.17", features = ["async-compression", "bzip2", "deflate", "deflate64", "tokio", "tokio-fs"] }
+async-tar = "0.5.0"
+infer = "0.19.0"
+thiserror = "2.0.12"
+futures = "0.3"
+bytes = "1.10.1"
+
+[dev-dependencies]
+tokio = { version = "1", features = ["full"] }
