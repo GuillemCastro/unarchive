@@ -14,6 +14,17 @@ pub(crate) async fn unarchive_zip(bytes: Bytes, destination: impl AsRef<Path>) -
         let entry = reader.file().entries()[index].clone();
         let filename = entry.filename().as_str()?;
 
+        let path = destination.as_ref().join(filename);
+
+        match path.parent() {
+            Some(parent) => {
+                if !parent.exists() {
+                    tokio::fs::create_dir_all(parent).await?;
+                }
+            }
+            None => {}
+        }
+
         if entry.dir()? {
             tokio::fs::create_dir_all(destination.as_ref().join(filename)).await?;
             continue;
