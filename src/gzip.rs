@@ -3,15 +3,18 @@ use std::path::Path;
 use async_compression::futures::bufread::GzipDecoder;
 use async_tar::Archive;
 use bytes::Bytes;
-use futures::{io::Cursor, AsyncReadExt};
+use futures::{AsyncReadExt, io::Cursor};
 use tokio_util::compat::FuturesAsyncReadCompatExt;
 
 use crate::Error;
 
-pub(crate) async fn unarchive_gzip(bytes: Bytes, destination: impl AsRef<Path>) -> Result<(), Error> {
+pub(crate) async fn unarchive_gzip(
+    bytes: Bytes,
+    destination: impl AsRef<Path>,
+) -> Result<(), Error> {
     let is_tar = is_targz(&bytes).await?;
     let decoder = GzipDecoder::new(Cursor::new(bytes));
-    
+
     if is_tar {
         let ar = Archive::new(decoder);
 

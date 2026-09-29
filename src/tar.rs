@@ -6,7 +6,10 @@ use futures::io::Cursor;
 
 use crate::Error;
 
-pub(crate) async fn unarchive_tar(bytes: Bytes, destination: impl AsRef<Path>) -> Result<(), Error> {
+pub(crate) async fn unarchive_tar(
+    bytes: Bytes,
+    destination: impl AsRef<Path>,
+) -> Result<(), Error> {
     let ar = Archive::new(Cursor::new(bytes));
 
     ar.unpack(destination.as_ref()).await?;

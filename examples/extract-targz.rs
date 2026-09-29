@@ -7,5 +7,7 @@ pub async fn main() -> Result<(), Error> {
     let path = PathBuf::from("examples/example.tar.gz");
     println!("Unarchiving tar.gz file: {:?}", path);
 
-    Archive::from_path(path)?.unarchive("unarchived-targz").await
+    Archive::from_path(path)?
+        .unarchive("unarchived-targz")
+        .await
 }

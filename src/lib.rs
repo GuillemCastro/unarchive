@@ -109,6 +109,8 @@ pub enum Error {
     IOError(IOError),
     #[error("the archive format `{0:?}` is not supported")]
     InvalidFormat(Option<String>),
+    #[error("archive entry `{0}` escapes the destination directory")]
+    UnsafeEntry(String),
     #[error("error: {0}")]
     Unknown(String),
 }
@@ -125,6 +127,6 @@ impl From<ZipError> for Error {
     }
 }
 
-mod zip;
-mod tar;
 mod gzip;
+mod tar;
+mod zip;
